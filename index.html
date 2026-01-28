@@ -133,7 +133,6 @@
 
     <select id="colorFilter">
       <option value="">Toate culorile</option>
-      <option value="alb">Alb</option>
       <option value="rosu">Roșu</option>
       <option value="crem">Crem</option>
       <option value="galben">Galben</option>
@@ -169,54 +168,54 @@
   <script>
     const flowers = [
 { name: "Apache War Dance", image: "Apache War Dance - r2_4 - IMG_20230626_1734550784.jpg", color: "rosu", height: 75, season: "Mijlocul spre sfârșitul sezonului", cod: 3 },
-{ name: "Arabian Veil", image: "Arabian Veil - r2_14 - IMG_20230710_1822250784.jpg", color: "rosu, galben", height: 72.5, season: "Mijlocul sezonului", cod: 4 },
-{ name: "Aragon", image: "Aragon - r6_8 - IMG_20230630_1919220784.jpg", color: "rosu, galben", height: 70, season: "Timpuriu", cod: 3 },
+{ name: "Arabian Veil", image: "Arabian Veil - r2_14 - IMG_20230710_1822250784.jpg", color: "rosu, gen", height: 72.5, season: "Mijlocul sezonului", cod: 4 },
+{ name: "Aragon", image: "Aragon - r6_8 - IMG_20230630_1919220784.jpg", color: "rosu, gen", height: 70, season: "Timpuriu", cod: 3 },
 { name: "Art Gallery Sweet Tooth", image: "Art Gallery Sweet Tooth - r4_1 - IMG_20230710_1809040784.jpg", color: "rosu", height: 60, season: "Timpuriu", cod: 5 },
 { name: "Aussie Delight", image: "Aussie Delight - r2_9 - IMG_20230626_1735370784.jpg", color: "portocaliu", height: 70, season: "Mijlocul sezonului", cod: 6 },
 { name: "Awash with Color", image: "Awash with Color - r3_9 - IMG_20230630_1915090784.jpg", color: "roz", height: 80, season: "Începutul sezonului mijlociu", cod: 3 },
 { name: "Bela Lugosi", image: "Bela Lugosi - r8_11 - IMG_20230626_1752340784.jpg", color: "rosu", height: 83, season: "Mijlocul sezonului", cod: 3 },
-{ name: "Big Time Happy", image: "Big Time Happy - r2_16 - IMG_20230630_1933300784.jpg", color: "galben", height: 45, season: "Foarte timpuriu", cod: 2 },
+{ name: "Big Time Happy", image: "Big Time Happy - r2_16 - IMG_20230630_1933300784.jpg", color: "gen", height: 45, season: "Foarte timpuriu", cod: 2 },
 { name: "Bird Talk", image: "Bird Talk - r5_4 - IMG_20230704_1747330784.jpg", color: "maro", height: 60, season: "Începutul sezonului mijlociu", cod: 4 },
-{ name: "Black Arrowhead", image: "Black Arrowhead - r4_7 - IMG_20230720_1942080784.jpg", color: "rosu, galben", height: 85, season: "Mijlocul sezonului", cod: 3 },
-{ name: "Black Hornet", image: "Black Hornet - r1_17 - IMG_20230630_1934020784.jpg", color: "galben, violet", height: 88, season: "Începutul sezonului mijlociu", cod: 6 },
-{ name: "Blackberry Sherbert", image: "Blackberry Sherbert - r2_7 - IMG_20230710_1803300784.jpg", color: "galben, rosu", height: 70, season: "Mijlocul spre sfârșitul sezonului", cod: 3 },
+{ name: "Black Arrowhead", image: "Black Arrowhead - r4_7 - IMG_20230720_1942080784.jpg", color: "rosu, gen", height: 85, season: "Mijlocul sezonului", cod: 3 },
+{ name: "Black Hornet", image: "Black Hornet - r1_17 - IMG_20230630_1934020784.jpg", color: "gen, violet", height: 88, season: "Începutul sezonului mijlociu", cod: 6 },
+{ name: "Blackberry Sherbert", image: "Blackberry Sherbert - r2_7 - IMG_20230710_1803300784.jpg", color: "gen, rosu", height: 70, season: "Mijlocul spre sfârșitul sezonului", cod: 3 },
 { name: "Bluebe Ray Bar", image: "Bluebe Ray Bar - r1_4 - IMG_20230630_1905030784.jpg", color: "portocaliu", height: null, season: "null", cod: 5 },
 { name: "Blueberry Candy", image: "Blueberry Candy - r4_6 - IMG_20230630_1911170784.jpg", color: "roz, rosu", height: 55, season: "Mijlocul sezonului", cod: 2 },
-{ name: "Bonanza", image: "Bonanza - r6_14 - IMG_20230710_1829460784.jpg", color: "galben, rosu", height: 60, season: "Mijlocul spre sfârșitul sezonului", cod: 3 },
+{ name: "Bonanza", image: "Bonanza - r6_14 - IMG_20230710_1829460784.jpg", color: "gen, rosu", height: 60, season: "Mijlocul spre sfârșitul sezonului", cod: 3 },
 { name: "Celtic Buterfly", image: "Celtic Buterfly - r3_13 - IMG_20230626_1747400784.jpg", color: "portocaliu", height: 83, season: "Începutul sezonului mijlociu", cod: 5 },
-{ name: "Cheese and Wine", image: "Cheese and Wine - r6_16 - IMG_20230630_1941020784.jpg", color: "violet, galben", height: null, season: "null", cod: 0 },
-{ name: "Cherry Eyed Pum", image: "Cherry Eyed Pum - r1_8 - IMG_20230630_1906340784.jpg", color: "galben, rosu", height: 70, season: "Foarte timpuriu", cod: 2 },
+{ name: "Cheese and Wine", image: "Cheese and Wine - r6_16 - IMG_20230630_1941020784.jpg", color: "violet, gen", height: null, season: "null", cod: 0 },
+{ name: "Cherry Eyed Pum", image: "Cherry Eyed Pum - r1_8 - IMG_20230630_1906340784.jpg", color: "gen, rosu", height: 70, season: "Foarte timpuriu", cod: 2 },
 { name: "Chicks Dig It", image: "Chicks Dig It - r7_15 - IMG_20230630_1941460784.jpg", color: "rosu", height: 75, season: "Mijlocul sezonului", cod: 5 },
-{ name: "Chokecherry Mountain", image: "Chokecherry Mountain - r3_3 - IMG_20230630_1909280784.jpg", color: "visiniu, galben", height: 85, season: "Mijlocul sezonului", cod: 4 },
-{ name: "Colonel Mustard", image: "Colonel Mustard - r3_2 - IMG_20230704_1744030784.jpg", color: "galben", height: 50, season: "Mijlocul spre sfârșitul sezonului", cod: 5 },
-{ name: "Crowley Crown", image: "Crowley Crown - r4_14 - IMG_20230710_1826480784.jpg", color: "rosu, galben", height: null, season: "null", cod: 3 },
-{ name: "Daria", image: "Daria - r6_7 - IMG_20230626_1741180784.jpg", color: "visiniu, galben", height: 55, season: "Începutul sezonului mijlociu", cod: 4 },
+{ name: "Chokecherry Mountain", image: "Chokecherry Mountain - r3_3 - IMG_20230630_1909280784.jpg", color: "visiniu, gen", height: 85, season: "Mijlocul sezonului", cod: 4 },
+{ name: "Colonel Mustard", image: "Colonel Mustard - r3_2 - IMG_20230704_1744030784.jpg", color: "gen", height: 50, season: "Mijlocul spre sfârșitul sezonului", cod: 5 },
+{ name: "Crowley Crown", image: "Crowley Crown - r4_14 - IMG_20230710_1826480784.jpg", color: "rosu, gen", height: null, season: "null", cod: 3 },
+{ name: "Daria", image: "Daria - r6_7 - IMG_20230626_1741180784.jpg", color: "visiniu, gen", height: 55, season: "Începutul sezonului mijlociu", cod: 4 },
 { name: "Dark and Handsome", image: "Dark and Handsome - r2_13 - IMG_20230710_1821390784.jpg", color: "portocaliu", height: 50, season: "Mijlocul sezonului", cod: 3 },
-{ name: "Dimensional Shift", image: "Dimensional Shift - r4_9 - IMG_20230615_0726090784.jpg", color: "galbe, visiniu", height: 65, season: "Începutul sezonului mijlociu", cod: 5 },
+{ name: "Dimensional Shift", image: "Dimensional Shift - r4_9 - IMG_20230615_0726090784.jpg", color: "ge, visiniu", height: 65, season: "Începutul sezonului mijlociu", cod: 5 },
 { name: "Double Pompon", image: "Double Pompon - r6_11 - IMG_20230704_1819220784.jpg", color: "portocaliu", height: 85, season: "Mijlocul sezonului", cod: 4 },
 { name: "Duke Ellington", image: "Duke Ellington - r4_11 - IMG_20230630_1938180784.jpg", color: "roz, visiniu", height: 75, season: "Începutul sezonului mijlociu", cod: 5 },
-{ name: "Duke of Gascone", image: "Duke of Gascone - r2_5 - IMG_20230630_1908150784.jpg", color: "visiniu, galben", height: 60, season: "Începutul sezonului mijlociu", cod: 8 },
-{ name: "Eight Miles High", image: "Eight Miles High - r6_17 - IMG_20230630_1940050784.jpg", color: "visiniu, galben", height: 75, season: "Mijlocul sezonului", cod: 5 },
+{ name: "Duke of Gascone", image: "Duke of Gascone - r2_5 - IMG_20230630_1908150784.jpg", color: "visiniu, gen", height: 60, season: "Începutul sezonului mijlociu", cod: 8 },
+{ name: "Eight Miles High", image: "Eight Miles High - r6_17 - IMG_20230630_1940050784.jpg", color: "visiniu, gen", height: 75, season: "Mijlocul sezonului", cod: 5 },
 { name: "Elegant Candy", image: "Elegant Candy - r5_3 - IMG_20230704_1746530784.jpg", color: "roz", height: 62, season: "Începutul sezonului mijlociu", cod: 3 },
 { name: "Emerie Baker", image: "Emeric Baker - r2_19 - IMG_20230626_1745380784.jpg", color: "roz", height: 76, season: "Timpuriu", cod: 6 },
 { name: "Entrapment", image: "Entrapment - r4_19 - IMG_20230710_1824220784.jpg", color: "roz", height: 65, season: "Mijlocul sezonului", cod: 3 },
-{ name: "Exotic Etching", image: "Exotic Etching - r3_5 - IMG_20230622_1453140784.jpg", color: "galben, visiniu", height: 48, season: "Mijlocul sezonului", cod: 5 },
-{ name: "Fooled Me", image: "Fooled Me - r7_16 - IMG_20230710_2059540784.jpg", color: "galben, visiniu", height: 60, season: "Începutul sezonului mijlociu", cod: 4 },
+{ name: "Exotic Etching", image: "Exotic Etching - r3_5 - IMG_20230622_1453140784.jpg", color: "gen, visiniu", height: 48, season: "Mijlocul sezonului", cod: 5 },
+{ name: "Fooled Me", image: "Fooled Me - r7_16 - IMG_20230710_2059540784.jpg", color: "gen, visiniu", height: 60, season: "Începutul sezonului mijlociu", cod: 4 },
 { name: "Forgotten Dreams", image: "Forgotten Dreams - r6_10 - IMG_20230626_1740290784.jpg", color: "visiniu ", height: 62, season: "Mijlocul spre sfârșitul sezonului", cod: 3 },
 { name: "Fox Hunter", image: "Fox Hunter - r5_1 - IMG_20230704_1745330784.jpg", color: "portocaliu, rosu", height: 80, season: "Începutul sezonului mijlociu", cod: 3 },
-{ name: "Fully Exotic", image: "Fully Exotic - r1_9 - IMG_20230622_1448420784.jpg", color: "galben, visiniu", height: 70, season: "Începutul sezonului mijlociu", cod: 7 },
+{ name: "Fully Exotic", image: "Fully Exotic - r1_9 - IMG_20230622_1448420784.jpg", color: "gen, visiniu", height: 70, season: "Începutul sezonului mijlociu", cod: 7 },
 { name: "Goldner's Red Velvet", image: "GOLDNER-S RED VELVET - r8_3 - IMG_20230626_1742420784.jpg", color: "rosu", height: 65, season: "null", cod: 5 },
-{ name: "Grand Masque", image: "Grand Masque - r5_6 - IMG_20230626_1738410784.jpg", color: "galben, visiniu", height: 58, season: "Începutul sezonului mijlociu", cod: 5 },
-{ name: "Grape Custard", image: "Grape Custard - r1_1 - IMG_20230630_1904290784.jpg", color: "galben, visiniu", height: 65, season: "Mijlocul sezonului", cod: 3 },
+{ name: "Grand Masque", image: "Grand Masque - r5_6 - IMG_20230626_1738410784.jpg", color: "gen, visiniu", height: 58, season: "Începutul sezonului mijlociu", cod: 5 },
+{ name: "Grape Custard", image: "Grape Custard - r1_1 - IMG_20230630_1904290784.jpg", color: "gen, visiniu", height: 65, season: "Mijlocul sezonului", cod: 3 },
 { name: "Hall's Pink", image: "Hall-s Pink - r5_7 - IMG_20230630_1920280784.jpg", color: "roz", height: 62, season: "null", cod: 2 },
 { name: "Hearts of Fire", image: "Hearts of Fire - r7_12 - IMG_20230626_1753020784.jpg", color: "rosu", height: 75, season: "Mijlocul sezonului", cod: 3 },
 { name: "Heavenly Pink Fang", image: "Heavenly Pink Fang - r2_12 - IMG_20230720_1950360784.jpg", color: "roz", height: 60, season: "Mijlocul spre sfârșitul sezonului", cod: 5 },
-{ name: "Heavy Metal", image: "Heavy Metal - r1_14 - IMG_20230626_1744270784.jpg", color: "galben", height: 67, season: "Mijlocul sezonului", cod: 3 },
+{ name: "Heavy Metal", image: "Heavy Metal - r1_14 - IMG_20230626_1744270784.jpg", color: "gen", height: 67, season: "Mijlocul sezonului", cod: 3 },
 { name: "Henry Lorrain", image: "Henry Lorraine - r5_18 - IMG_20230626_1755150784.jpg", color: "roz", height: null, season: "null", cod: 2 },
 { name: "In Too Deep", image: "In Too Deep - r1_12 - IMG_20230626_1744110784.jpg", color: "rosu", height: 63, season: "Mijlocul sezonului", cod: 3 },
-{ name: "Inner Destiny", image: "Inner Destiny - r1_11 - IMG_20230710_1818410784.jpg", color: "galben, visiniu", height: 70, season: "Începutul sezonului mijlociu", cod: 4 },
+{ name: "Inner Destiny", image: "Inner Destiny - r1_11 - IMG_20230710_1818410784.jpg", color: "gen, visiniu", height: 70, season: "Începutul sezonului mijlociu", cod: 4 },
 { name: "Jerry Pate Williams", image: "Jerry Pate Williams - r1_2 - IMG_20230626_1733040784.jpg", color: "roz", height: 63, season: "Timpuriu", cod: 5 },
-{ name: "Joan Senior White", image: "Joan Senior White - r4_18 - IMG_20230710_1823470784.jpg", color: "alb", height: 63, season: "Începutul sezonului mijlociu", cod: 2 },
+{ name: "Joan Senior White", image: "Joan Senior White - r4_18 - IMG_20230710_1823470784.jpg", color: "crem", height: 63, season: "Începutul sezonului mijlociu", cod: 2 },
 { name: "Lacy Dusk", image: "Lacy Dusk - r3_7 - IMG_20230622_1455000784.jpg", color: "galben", height: 60, season: "Foarte timpuriu", cod: 5 },
 { name: "Lavender Blue Baby", image: "Lavender Blue Baby - r5_12 - IMG_20230626_1750570784.jpg", color: "visiniu", height: 70, season: "Începutul sezonului mijlociu", cod: 5 },
 { name: "Little Fred", image: "Little Fred - r4_12 - IMG_20230710_1828080784.jpg", color: "visiniu", height: 60, season: "Începutul sezonului mijlociu", cod: 5 },
@@ -343,5 +342,6 @@
   </script>
 
 </body>
+
 
 
