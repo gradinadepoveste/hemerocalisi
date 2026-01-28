@@ -262,88 +262,95 @@
 { name: "Yuletide Magic", image: "Yuletide Magic - r6_12 - IMG_20230704_1820090784.jpg", color: "rosu, galben", height: 70, season: "null", cod: 6 },
  ];
     
-    function renderGallery(data) {
-      const gallery = document.getElementById("gallery");
-      gallery.innerHTML = "";
+    function normalize(text) {
+  return text
+    .toLowerCase()
+    .normalize("NFD")
+    .replace(/[\u0300-\u036f]/g, "")
+    .trim();
+}
 
-      data.forEach(f => {
-        const card = document.createElement("div");
-        card.className = "card";
+function renderGallery(data) {
+  const gallery = document.getElementById("gallery");
+  gallery.innerHTML = "";
 
-        card.innerHTML = `
-          <img src="${f.image}" alt="${f.name}">
-          <strong>${f.name}</strong>
-          <p>Înălțime: ${f.height || "N/A"} cm</p>
-          <p>Sezon: ${f.season || "—"}</p>
-          <p class="cod hidden"><strong>cod:</strong> ${f.cod ?? "—"}</p>
-        `;
+  data.forEach(f => {
+    const card = document.createElement("div");
+    card.className = "card";
 
-        gallery.appendChild(card);
-      });
+    card.innerHTML = `
+      <img src="${f.image}" alt="${f.name}">
+      <strong>${f.name}</strong>
+      <p>Înălțime: ${f.height || "N/A"} cm</p>
+      <p>Sezon: ${f.season || "—"}</p>
+      <p class="cod hidden"><strong>cod:</strong> ${f.cod ?? "—"}</p>
+    `;
 
-      document.getElementById("counter").textContent = `${data.length} hemerocalise găsite`;
-    }
+    gallery.appendChild(card);
+  });
 
-    function applyFilters() {
-      const nameVal = document.getElementById("search").value.toLowerCase();
-      const letterVal = document.getElementById("searchLetter").value.toLowerCase();
-      const colorVal = document.getElementById("colorFilter").value;
-      const seasonVal = document.getElementById("seasonFilter").value;
-      const minH = parseInt(document.getElementById("minHeight").value) || 0;
-      const maxH = parseInt(document.getElementById("maxHeight").value) || 999;
+  document.getElementById("counter").textContent = `${data.length} hemerocalise găsite`;
+}
 
-      let filtered = flowers.filter(f => {
-        const h = parseInt(f.height) || 0;
+function applyFilters() {
+  const nameVal = normalize(document.getElementById("search").value);
+  const letterVal = normalize(document.getElementById("searchLetter").value);
+  const colorVal = normalize(document.getElementById("colorFilter").value);
+  const seasonVal = normalize(document.getElementById("seasonFilter").value);
+  const minH = parseInt(document.getElementById("minHeight").value) || 0;
+  const maxH = parseInt(document.getElementById("maxHeight").value) || 999;
 
-        const matchesName = f.name.toLowerCase().includes(nameVal);
-        const matchesLetter = !letterVal || f.name.toLowerCase().startsWith(letterVal);
-        const matchesColor = !colorVal || (f.color && f.color.toLowerCase().includes(colorVal));
-        const matchesSeason = !seasonVal || (f.season && f.season.toLowerCase().includes(seasonVal.toLowerCase()));
-        const matchesHeight = h >= minH && h <= maxH;
+  let filtered = flowers.filter(f => {
+    const h = parseInt(f.height) || 0;
 
-        return matchesName && matchesLetter && matchesColor && matchesSeason && matchesHeight;
-      });
+    const nameNorm = normalize(f.name);
+    const colorNorm = f.color ? normalize(f.color) : "";
+    const seasonNorm = f.season ? normalize(f.season) : "";
 
-      const alphaSort = document.getElementById("sortAlpha").value;
+    const matchesName = nameNorm.includes(nameVal);
+    const matchesLetter = !letterVal || nameNorm.startsWith(letterVal);
 
-      if (alphaSort === "az") {
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (alphaSort === "za") {
-        filtered.sort((a, b) => b.name.localeCompare(a.name));
-      }
+    // *** AICI ESTE FIXUL IMPORTANT ***
+    const matchesColor = !colorVal || colorNorm === colorVal;
 
-      renderGallery(filtered);
+    const matchesSeason = !seasonVal || seasonNorm.includes(seasonVal);
+    const matchesHeight = h >= minH && h <= maxH;
 
-      if (codVisible) {
-        document.querySelectorAll(".cod").forEach(el => el.classList.remove("hidden"));
-      }
-    }
+    return matchesName && matchesLetter && matchesColor && matchesSeason && matchesHeight;
+  });
 
-    document.querySelectorAll(".filters input, .filters select").forEach(el => {
-      el.addEventListener("input", applyFilters);
-    });
+  const alphaSort = document.getElementById("sortAlpha").value;
 
-    document.getElementById("resetBtn").onclick = () => {
-      document.querySelectorAll(".filters input, .filters select").forEach(el => el.value = "");
-      applyFilters();
-    };
+  if (alphaSort === "az") {
+    filtered.sort((a, b) => a.name.localeCompare(b.name));
+  } else if (alphaSort === "za") {
+    filtered.sort((a, b) => b.name.localeCompare(a.name));
+  }
 
-    const topBtn = document.getElementById("backToTop");
-    window.onscroll = () => topBtn.style.display = window.scrollY > 400 ? "block" : "none";
-    topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
+  renderGallery(filtered);
 
-    let codVisible = false;
-    document.getElementById("secretCod").addEventListener("click", () => {
-      codVisible = !codVisible;
-      document.querySelectorAll(".cod").forEach(el => el.classList.toggle("hidden", !codVisible));
-    });
+  if (codVisible) {
+    document.querySelectorAll(".cod").forEach(el => el.classList.remove("hidden"));
+  }
+}
 
-    renderGallery(flowers);
-  </script>
+document.querySelectorAll(".filters input, .filters select").forEach(el => {
+  el.addEventListener("input", applyFilters);
+});
 
-</body>
-</html>
+document.getElementById("resetBtn").onclick = () => {
+  document.querySelectorAll(".filters input, .filters select").forEach(el => el.value = "");
+  applyFilters();
+};
 
+const topBtn = document.getElementById("backToTop");
+window.onscroll = () => topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
+let codVisible = false;
+document.getElementById("secretCod").addEventListener("click", () => {
+  codVisible = !codVisible;
+  document.querySelectorAll(".cod").forEach(el => el.classList.toggle("hidden", !codVisible));
+});
 
-
+renderGallery(flowers);
