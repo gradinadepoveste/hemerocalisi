@@ -53,27 +53,21 @@
     .filters input,
     .filters select,
     .filters button {
-    padding: 0.4rem;
-    font-size: 0.9rem;
-    max-width: 130px;
-}
+      padding: 0.4rem;
+      font-size: 0.9rem;
+      max-width: 130px;
+    }
 
     #searchLetter { width: 45px; text-align: center; }
     #minHeight, #maxHeight { width: 60px; text-align: center; }
 
     /* --- GALERIE --- */
     .gallery {
-      display: grid;
-    /* Creează coloane care se adaptează automat ecranului */
-    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
-    gap: 20px;
-    padding: 15px;
-    width: 100%;
-    max-width: 1400px; /* Previne întinderea excesivă pe monitoare mari */
-    margin: 0 auto;    /* Centrează galeria pe mijlocul ecranului */
-    justify-content: center;
-    box-sizing: border-box; /* Foarte important pentru mobil! */
-}
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
 
     .card {
       background: white;
@@ -87,9 +81,9 @@
 
     .card img {
       width: 100%;
-      height: 250px;
+      height: 200px;
       object-fit: cover;
-      border-radius: block;
+      border-radius: 4px;
     }
 
     .hidden { display: none; }
@@ -363,6 +357,3 @@
 
 </body>
 </html>
-
-
-
