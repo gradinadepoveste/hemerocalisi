@@ -14,6 +14,16 @@
   <title>Grădina de poveste – Hemerocalisi</title>
   
 <style>
+    /* Resetare universală pentru a preveni lărgirea elementelor */
+    * {
+      box-sizing: border-box;
+    }
+
+    html, body {
+      max-width: 100%;
+      overflow-x: hidden; /* Aceasta oprește balansul stânga-dreapta */
+    }
+
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f4f4f9;
@@ -153,7 +163,9 @@
 
     /* --- OPTIMIZARE MOBIL --- */
     @media (max-width: 600px) {
-      body { padding: 0.5rem; }
+      .filters input, 
+      .filters select {
+       font-size: 16px !important; /* Previne zoom-ul automat al iPhone-ului }
       
       .filters {
         gap: 0.4rem;
@@ -419,4 +431,5 @@
 
 </body>
 </html>
+
 
