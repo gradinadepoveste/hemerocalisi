@@ -50,15 +50,16 @@
       align-items: center;
       margin-bottom: 1.5rem;
       background: #ffffff;
-      padding: 1rem;
+      padding: 10px;
       border-radius: 12px;
       position: sticky;
       top: 10px;
       z-index: 100;
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
+      width: 100%;           /* Ocupă lățimea disponibilă */
+      max-width: 100%;       /* NU permite depășirea ecranului */
+      box-sizing: border-box; /* Include padding-ul în lățime */
+      overflow: hidden;;
     }
 
     .filters input,
@@ -418,3 +419,4 @@
 
 </body>
 </html>
+
