@@ -4,17 +4,12 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <!-- CSP propriu -->
   <meta http-equiv="Content-Security-Policy"
       content="default-src 'self';
                img-src 'self' data:;
                style-src 'unsafe-inline';
                script-src 'self' 'unsafe-inline';
                connect-src 'self'">
-
-
-  <!-- Favicon -->
-  <link rel="icon" href="/favicon.ico">
 
   <title>Grădina de poveste – Hemerocalisi</title>
 
@@ -37,7 +32,8 @@
       height: auto;
       display: block;
     }
-    
+
+    /* --- BARA DE FILTRE OPTIMIZATĂ --- */
     .filters {
       display: flex;
       flex-wrap: wrap;
@@ -55,25 +51,17 @@
     }
 
     .filters input,
-    .filters select, { 
-      max-width: 130px;
+    .filters select,
     .filters button {
       padding: 0.4rem;
       font-size: 0.9rem;
+      max-width: 130px;
     }
 
     #searchLetter { width: 45px; text-align: center; }
-    #minHeight, #maxHeight { width: 60px; }
+    #minHeight, #maxHeight { width: 60px; text-align: center; }
 
-    /* câmpuri mari */
-    #seasonFilter,
-    #colorFilter,
-   #classFilter,
-    #sortAlpha,
-    #sortHeight {
-      max-width: 130px;
-    }
-    
+    /* --- GALERIE --- */
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -139,11 +127,11 @@
     <img src="IMG_20230703_120406.jpg" alt="Imagine decorativă">
   </header>
 
-  <!-- BUTON SECRET -->
   <div id="secretCod" style="text-align:center; opacity:0.3; cursor:pointer; margin-bottom:10px;">
     text
   </div>
 
+  <!-- BARA DE FILTRE -->
   <div class="filters">
     <input type="text" id="search" placeholder="Caută nume...">
 
@@ -185,6 +173,7 @@
   </div>
 
   <div id="counter" style="text-align:center; margin-bottom:10px;"></div>
+
   <section class="gallery" id="gallery"></section>
 
   <button id="backToTop">↑ TOP</button>
@@ -319,22 +308,19 @@
       let filtered = flowers.filter(f => {
         const h = parseInt(f.height) || 0;
 
-        const matchesName = f.name.toLowerCase().includes(nameVal);
-        const matchesLetter = !letterVal || f.name.toLowerCase().startsWith(letterVal);
-        const matchesColor = !colorVal || (f.color && f.color.toLowerCase().includes(colorVal));
-        const matchesSeason = !seasonVal || (f.season && f.season.toLowerCase().includes(seasonVal.toLowerCase()));
-        const matchesHeight = h >= minH && h <= maxH;
-
-        return matchesName && matchesLetter && matchesColor && matchesSeason && matchesHeight;
+        return (
+          f.name.toLowerCase().includes(nameVal) &&
+          (!letterVal || f.name.toLowerCase().startsWith(letterVal)) &&
+          (!colorVal || f.color.toLowerCase().includes(colorVal)) &&
+          (!seasonVal || (f.season && f.season.toLowerCase().includes(seasonVal.toLowerCase()))) &&
+          h >= minH && h <= maxH
+        );
       });
 
       const alphaSort = document.getElementById("sortAlpha").value;
 
-      if (alphaSort === "az") {
-        filtered.sort((a, b) => a.name.localeCompare(b.name));
-      } else if (alphaSort === "za") {
-        filtered.sort((a, b) => b.name.localeCompare(a.name));
-      }
+      if (alphaSort === "az") filtered.sort((a, b) => a.name.localeCompare(b.name));
+      if (alphaSort === "za") filtered.sort((a, b) => b.name.localeCompare(a.name));
 
       renderGallery(filtered);
 
@@ -343,31 +329,31 @@
       }
     }
 
-    document.querySelectorAll(".filters input, .filters select").forEach(el => {
-      el.addEventListener("input", applyFilters);
-    });
+    document.querySelectorAll(".filters input, .filters select")
+      .forEach(el => el.addEventListener("input", applyFilters));
 
     document.getElementById("resetBtn").onclick = () => {
-      document.querySelectorAll(".filters input, .filters select").forEach(el => el.value = "");
+      document.querySelectorAll(".filters input, .filters select")
+        .forEach(el => el.value = "");
       applyFilters();
     };
 
     const topBtn = document.getElementById("backToTop");
-    window.onscroll = () => topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+    window.onscroll = () => {
+      topBtn.style.display = window.scrollY > 400 ? "block" : "none";
+    };
     topBtn.onclick = () => window.scrollTo({ top: 0, behavior: 'smooth' });
 
     let codVisible = false;
-    document.getElementById("secretCod").addEventListener("click", () => {
+    document.getElementById("secretCod").onclick = () => {
       codVisible = !codVisible;
-      document.querySelectorAll(".cod").forEach(el => el.classList.toggle("hidden", !codVisible));
-    });
+      document.querySelectorAll(".cod").forEach(el =>
+        codVisible ? el.classList.remove("hidden") : el.classList.add("hidden")
+      );
+    };
 
     renderGallery(flowers);
   </script>
 
 </body>
-
-
-
-
-
+</html>
