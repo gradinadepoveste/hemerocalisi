@@ -33,26 +33,24 @@
     }
 
     header img {
-      max-width: 800px;
       width: 100%;
       height: auto;
-      border-radius: 10px;
-      box-shadow: 0 2px 6px rgba(0,0,0,0.15);
-      margin-top: 10px;
+      display: block;
     }
-
+    
     .filters {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.5rem;
+      gap: 0.4rem;
       justify-content: center;
       margin-bottom: 1rem;
       background: #eee;
-      padding: 1rem;
+      padding: 0.7rem;
       border-radius: 8px;
       position: sticky;
       top: 10px;
       z-index: 100;
+      max-width: 100%;
     }
 
     .filters input,
@@ -62,9 +60,18 @@
       font-size: 0.9rem;
     }
 
-    #searchLetter { width: 60px; text-align: center; }
-    #minHeight, #maxHeight { width: 80px; }
+    #searchLetter { width: 45px; text-align: center; }
+    #minHeight, #maxHeight { width: 60px; }
 
+    /* câmpuri mari */
+    #seasonFilter,
+    #colorFilter,
+   #classFilter,
+    #sortAlpha,
+    #sortHeight {
+      max-width: 130px;
+    }
+    
     .gallery {
       display: flex;
       flex-wrap: wrap;
@@ -103,6 +110,21 @@
       cursor: pointer;
       display: none;
       font-weight: bold;
+    }
+
+    /* --- OPTIMIZARE MOBIL --- */
+    @media (max-width: 600px) {
+      .filters {
+        gap: 0.3rem;
+        padding: 0.6rem;
+      }
+
+      .filters input,
+      .filters select,
+      .filters button {
+        font-size: 0.8rem;
+        padding: 0.3rem;
+      }
     }
   </style>
 </head>
@@ -342,6 +364,7 @@
   </script>
 
 </body>
+
 
 
 
