@@ -63,14 +63,16 @@
 
     /* --- GALERIE --- */
     .gallery {
-      display: flex;
-      flex-wrap: wrap;       /* Permite trecerea pe rândul următor */
-    justify-content: center; /* CENTREAZĂ cardurile pe orizontală */
-    gap: 20px;             /* Spațiu egal între poze */
-    padding: 20px;
+      display: grid;
+    /* Creează coloane care se adaptează automat ecranului */
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+    gap: 20px;
+    padding: 15px;
     width: 100%;
-    max-width: 1200px;     /* Previne lărgirea excesivă pe PC */
-    margin: 0 auto;        /* Centrează întreaga galerie pe pagină */
+    max-width: 1400px; /* Previne întinderea excesivă pe monitoare mari */
+    margin: 0 auto;    /* Centrează galeria pe mijlocul ecranului */
+    justify-content: center;
+    box-sizing: border-box; /* Foarte important pentru mobil! */
 }
 
     .card {
@@ -85,9 +87,9 @@
 
     .card img {
       width: 100%;
-      height: 300px;
+      height: 250px;
       object-fit: cover;
-      border-radius: 8px 8px 0 0;
+      border-radius: block;
     }
 
     .hidden { display: none; }
@@ -361,5 +363,6 @@
 
 </body>
 </html>
+
 
 
