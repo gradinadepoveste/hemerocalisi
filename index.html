@@ -14,44 +14,48 @@
   <title>Grădina de poveste – Hemerocalisi</title>
   
 <style>
-    /* Resetare universală pentru a preveni lărgirea elementelor */
+    /* Resetare universală */
     * {
       box-sizing: border-box;
     }
 
     html, body {
-      max-width: 100%;
-      overflow-x: hidden; /* Aceasta oprește balansul stânga-dreapta */
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      /* Am scos overflow-x: hidden de aici pentru a permite 'sticky' */
+    }
+
+    /* Containerul care previne mișcarea stânga-dreapta fără să blocheze meniul sticky */
+    .main-wrapper {
+      width: 100%;
+      overflow-x: hidden;
     }
 
     body {
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       background: #f4f4f9;
-      margin: 0;
-      padding: 1rem;
       scroll-behavior: smooth;
       color: #333;
     }
 
     header {
       text-align: center;
-      margin-bottom: 2rem;
+      padding: 1rem;
       max-width: 1200px;
-      margin-left: auto;
-      margin-right: auto;
-      overflow: hidden;
-      border-radius: 12px;
+      margin: 0 auto 1rem auto;
     }
 
     header img {
       width: 100%;
       height: auto;
-      max-height: 300px; /* Limitează înălțimea pozei de header pe PC */
+      max-height: 250px;
       object-fit: cover;
       display: block;
+      border-radius: 12px;
     }
 
-    /* --- BARA DE FILTRE OPTIMIZATĂ --- */
+    /* --- BARA DE FILTRE FLOTANTĂ --- */
     .filters {
       display: flex;
       flex-wrap: wrap;
@@ -59,17 +63,19 @@
       justify-content: center;
       align-items: center;
       margin-bottom: 1.5rem;
-      background: #ffffff;
+      background: rgba(255, 255, 255, 0.95); /* Alb perlat */
+      backdrop-filter: blur(5px);           /* Efect de sticlă mată */
       padding: 10px;
-      border-radius: 12px;
+      border-bottom: 1px solid #ddd;
+      
+      /* Activează flotarea */
+      position: -webkit-sticky; 
       position: sticky;
-      top: 10px;
-      z-index: 100;
+      top: 0; 
+      z-index: 1000;
+      
       box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-      width: 100%;           /* Ocupă lățimea disponibilă */
-      max-width: 100%;       /* NU permite depășirea ecranului */
-      box-sizing: border-box; /* Include padding-ul în lățime */
-      overflow: hidden;;
+      width: 100%;
     }
 
     .filters input,
@@ -80,66 +86,45 @@
       border: 1px solid #ddd;
       border-radius: 6px;
       outline: none;
+      flex: 0 1 auto; /* Previne lărgirea excesivă pe PC */
     }
 
-    .filters input:focus, .filters select:focus {
-      border-color: #007bff;
-    }
-
-    #searchLetter { width: 50px; text-align: center; }
-    #minHeight, #maxHeight { width: 70px; text-align: center; }
+    /* Dimensiuni fixe pentru câmpurile mici */
+    #searchLetter { width: 50px !important; flex: 0 0 50px; text-align: center; }
+    #minHeight, #maxHeight { width: 70px !important; flex: 0 0 70px; text-align: center; }
+    #searchInput { width: 180px; }
 
     /* --- GALERIE --- */
     .gallery {
       display: flex;
       flex-wrap: wrap;
       gap: 1.5rem;
-      justify-content: center; /* Centrează cardurile indiferent de numărul lor */
+      justify-content: center;
       max-width: 1400px;
       margin: 0 auto;
-      width: 100%;
+      padding: 1rem;
     }
 
-    /* --- CARDURI (FIXATE PENTRU PC) --- */
     .card {
       background: white;
       border: 1px solid #eee;
       border-radius: 12px;
-      width: 240px;      /* Lățime fixă pentru consistență */
-      max-width: 240px;  /* Previne lărgirea pe ecrane mari */
+      width: 240px;
+      max-width: 240px;
       padding: 1rem;
       text-align: center;
       transition: transform 0.2s, box-shadow 0.2s;
       box-shadow: 0 2px 8px rgba(0,0,0,0.05);
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
-    }
-
-    .card:hover {
-      transform: translateY(-5px);
-      box-shadow: 0 8px 16px rgba(0,0,0,0.1);
     }
 
     .card img {
       width: 100%;
-      height: 200px;     /* Înălțime fixă obligatorie */
-      object-fit: cover; /* Taie imaginea fără să o deformeze */
+      height: 200px;
+      object-fit: cover;
       border-radius: 8px;
-      display: block;
       margin-bottom: 0.8rem;
-    }
-
-    .card h3 {
-      margin: 0.5rem 0;
-      font-size: 1.1rem;
-      color: #111;
-    }
-
-    .card p {
-      margin: 0.2rem 0;
-      font-size: 0.85rem;
-      color: #666;
     }
 
     .hidden { display: none; }
@@ -154,43 +139,32 @@
       color: white;
       border: none;
       border-radius: 50%;
-      cursor: pointer;
-      display: none;
-      font-size: 1.2rem;
-      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
-      z-index: 1000;
+      z-index: 1100;
     }
 
     /* --- OPTIMIZARE MOBIL --- */
     @media (max-width: 600px) {
-      .filters input, 
-      .filters select {
-       font-size: 16px !important; /* Previne zoom-ul automat al iPhone-ului }
-      
       .filters {
-        gap: 0.4rem;
-        padding: 0.8rem;
-        border-radius: 0; /* Ocupă toată lățimea pe mobil pentru stabilitate */
-        width: 100vw;
-        left: 0;
-        margin-left: -0.5rem; /* Aliniere cu padding-ul body-ului */
+        padding: 8px;
+        gap: 0.3rem;
       }
 
       .filters input,
       .filters select,
       .filters button {
-        flex-grow: 1; /* Se lărgesc să ocupe rândul pe mobil */
-        font-size: 0.85rem;
+        flex: 1 1 40%; /* Ocupă spațiu egal pe rânduri */
+        font-size: 16px !important; /* Fixează problema de zoom la tastare */
+        min-width: 0;
       }
 
-      #searchLetter { flex-grow: 0; width: 45px; }
+      #searchLetter { flex: 0 0 50px; }
 
       .card {
-        width: 100%;     /* Cardul ocupă aproape tot ecranul pe mobil mic... */
-        max-width: 280px; /* ...dar nu mai mult de 280px */
+        width: 100%;
+        max-width: 280px;
       }
     }
-  </style>
+</style>
   </head>
 
 <body>
@@ -431,5 +405,3 @@
 
 </body>
 </html>
-
-
